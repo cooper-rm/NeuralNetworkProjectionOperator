@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neural Network Visualization</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app">
+    <nav id="tab-bar">
+      <button class="tab active" data-view="embeddings">Embeddings</button>
+      <button class="tab" data-view="weights">Weights</button>
+      <button class="tab" data-view="gradients">Gradients</button>
+      <!-- <button class="tab" data-view="network">Network Graph</button> -->
+      <div class="tab-bar-spacer"></div>
+      <div id="run-selector">
+        <label for="run-select">Run:</label>
+        <select id="run-select"></select>
+        <button id="btn-refresh-runs" title="Refresh runs list">&#8635;</button>
+      </div>
+    </nav>
+
+    <div id="viewport">
+      <!-- Floating layer panel (left) -->
+      <div id="layer-panel">
+        <div class="panel-title">Layers</div>
+        <ul id="layer-list"></ul>
+      </div>
+
+      <!-- Floating sample selector panel (left, for network view) -->
+      <div id="sample-selector" style="display:none;">
+        <div class="panel-title">Input Sample</div>
+        <select id="sample-select"></select>
+      </div>
+
+      <!-- Floating color scale (right) -->
+      <div id="color-scale-panel">
+        <div id="color-legend"></div>
+        <div id="weight-gradient" style="display:none;">
+          <div class="gradient-bar"></div>
+          <div class="gradient-labels">
+            <span id="gradient-min"></span>
+            <span>0</span>
+            <span id="gradient-max"></span>
+          </div>
+        </div>
+        <div id="activation-gradient" style="display:none;">
+          <div class="panel-title">Activation</div>
+          <div class="activation-gradient-bar"></div>
+          <div class="activation-gradient-labels">
+            <span>1.0</span>
+            <span>0.5</span>
+            <span>0.0</span>
+          </div>
+        </div>
+        <div id="grad-value-gradient" style="display:none;">
+          <div class="panel-title" style="font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Loss Landscape</div>
+          <div class="grad-gradient-bar"></div>
+          <div class="grad-gradient-labels">
+            <span id="grad-val-max"></span>
+            <span id="grad-val-min"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bottom-bar">
+      <div id="playback-controls">
+        <button id="btn-prev" title="Previous step">&#9664;</button>
+        <button id="btn-play" title="Play/Pause">&#9654;</button>
+        <button id="btn-next" title="Next step">&#9654;&#9654;</button>
+        <select id="speed-select" title="Playback speed">
+          <option value="2000">0.5x</option>
+          <option value="1000" selected>1x</option>
+          <option value="500">2x</option>
+          <option value="250">4x</option>
+        </select>
+      </div>
+      <input type="range" id="step-slider" min="0" max="29" value="0" />
+      <span id="step-label">Step 0</span>
+      <span id="epoch-label">Epoch 0</span>
+      <span id="train-loss-label" class="metric-label">Train: ---</span>
+      <span id="val-loss-label" class="metric-label">Val: ---</span>
+      <span id="val-acc-label" class="metric-label">Val Acc: ---</span>
+      <span id="test-acc-label" class="metric-label">Test Acc: ---</span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
