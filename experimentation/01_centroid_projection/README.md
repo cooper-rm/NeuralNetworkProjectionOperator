@@ -154,7 +154,7 @@ All models: Adam optimizer, lr=0.001, weight_decay=1e-4, l1_lambda=1e-4, 10 epoc
 Each notebook is self-contained. Run cells in order. Seed is fixed (`torch.manual_seed(42)`) for reproducibility. Notebooks 01–10 export visualization data via `ExperimentTracker`; notebook 11 is analysis-only.
 
 ```
-experimentation/notebooks/
+experimentation/01_centroid_projection/notebooks/
 ├── 01_baseline.ipynb              # Vanilla MLP
 ├── 02_weight_decay.ipynb          # + L2 regularization
 ├── 03_batchnorm.ipynb             # + BatchNorm on hidden_1
