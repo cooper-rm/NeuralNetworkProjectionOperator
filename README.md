@@ -81,7 +81,7 @@ Each notebook adds one technique cumulatively. All use the same architecture, se
 | 02 | + Weight Decay (1e-4) | L2 | 0.9648 | 0.2763 |
 | 03 | + BatchNorm | L2 + BN | 0.9727 | 0.4621 |
 | 04 | + Dropout (0.3) | L2 + BN + Dropout | 0.9677 | 0.5189 |
-| 05 | + L1 Regularization (1e-4) | L2 + BN + Dropout + L1 | — | — |
+| 05 | + L1 Regularization (1e-4) | L2 + BN + Dropout + L1 | 0.9691 | 0.5059 |
 | 06 | + LayerNorm on h2 | L2 + BN(h1) + LN(h2) + Dropout + L1 | 0.9662 | 0.5379 |
 
 ### Experiment 01 — Centroid Projection Variants
@@ -146,7 +146,7 @@ Two-phase training: Phase 1 trains a backbone with a clustering objective, Phase
 - NB02 (+L2): test 0.9648, sil 0.2763 — minimal change from baseline
 - NB03 (+BN): test 0.9727, sil 0.4621 — biggest accuracy jump, silhouette nearly doubled
 - NB04 (+Dropout): test 0.9677, sil 0.5189 — accuracy dropped slightly but silhouette improved
-- NB05 (+L1): not yet run
+- NB05 (+L1): test 0.9691, sil 0.5059 — accuracy improved over dropout, silhouette slightly decreased
 - NB06 (+LN): test 0.9662, sil 0.5379 — highest silhouette in the ablation
 
 **Observations and conclusions:** Weight decay alone (NB02) barely changed cluster structure (sil 0.27→0.28). BatchNorm was the single biggest improvement boosting accuracy (+0.9pp) and substantially improving sillouhette score (sil 0.28→0.46). Interestingly, dropout hurt accuracy slightly but continued improving silhouette, suggesting it forces more separable embedding representations. The best cluster structure came from the full stack with LayerNorm (sil 0.54), even though pure BatchNorm had the best accuracy.
